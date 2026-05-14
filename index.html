@@ -2,63 +2,116 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#1a73e8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="হিসাব খাতা">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📒</text></svg>">
+    <link rel="apple-touch-icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📒</text></svg>">
     <title>হিসাব খাতা v5.9.5</title>
     <style>
         :root {
-            --bg: #f5f0eb; --text: #202124; --header: #1a73e8;
-            --card: #ffffff; --border: #e0d5c8; --input-bg: #ffffff;
-            --modal-bg: #ffffff; --danger: #d93025; --income: #0d904f;
-            --expense: #e67e22; --blue: #1a73e8; --gray: #5f6368;
-            --orange: #ffa726; --red: #ef5350; --purple: #ab47bc; --green: #0d904f;
+            --bg: #f5f0eb;
+            --text: #202124;
+            --header: #1a73e8;
+            --card: #ffffff;
+            --border: #e0d5c8;
+            --input-bg: #ffffff;
+            --modal-bg: #ffffff;
+            --danger: #d93025;
+            --income: #0d904f;
+            --expense: #e67e22;
+            --blue: #1a73e8;
+            --gray: #5f6368;
+            --orange: #ffa726;
+            --red: #ef5350;
+            --purple: #ab47bc;
+            --green: #0d904f;
+            --light-green: #4caf50;
         }
         .dark {
-            --bg: #1e1e1e; --text: #e8eaed; --card: #3c3c3c;
-            --border: #5f6368; --input-bg: #3c3c3c; --modal-bg: #2b2b2b;
+            --bg: #1e1e1e;
+            --text: #e8eaed;
+            --card: #3c3c3c;
+            --border: #5f6368;
+            --input-bg: #3c3c3c;
+            --modal-bg: #2b2b2b;
+            --light-green: #81c784;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
         body {
-            background: var(--bg); color: var(--text);
-            min-height: 100vh; display: flex; flex-direction: column;
-            overscroll-behavior: none; -webkit-tap-highlight-color: transparent;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overscroll-behavior: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .header {
-            background: var(--card); color: var(--text); padding: 14px 18px;
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 100;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-bottom: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border-bottom: 1px solid var(--border);
         }
         .header h1 { font-size: 18px; margin: 0; }
         .header-right { display: flex; gap: 6px; }
         .header button {
-            background: none; border: none; color: var(--text);
-            font-size: 18px; width: 36px; height: 36px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        /* ====== TOP TWO BOXES ====== */
         .top-boxes {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             padding: 12px;
         }
         .stat-box {
-            background: var(--card); border-radius: 20px; padding: 20px 16px;
-            box-shadow: 0 3px 14px rgba(0,0,0,0.07); border: 2px solid transparent;
+            background: var(--card);
+            border-radius: 20px;
+            padding: 20px 16px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+            border: 2px solid transparent;
         }
         .stat-box.negative { border-color: var(--danger); }
         .stat-box h3 {
-            font-size: 20px; font-weight: 700; color: var(--blue);
-            margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .stat-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 0; border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
         }
         .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
         .stat-label { font-size: 17px; color: var(--gray); font-weight: 500; }
@@ -67,43 +120,88 @@
         .stat-value.green { color: var(--income); }
         .stat-value.orange { color: var(--expense); }
         .stat-value.red { color: var(--danger); }
-
-        /* বাজেট বক্সের ভিতরে বাটন */
         .budget-btns-row {
-            display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            align-items: center;
         }
         .budget-cat-btn, .budget-period-btn {
-            background: var(--blue); color: white; border: none; border-radius: 10px;
-            padding: 9px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 9px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: 0 2px 6px rgba(26,115,232,0.2);
-            display: inline-flex; align-items: center; gap: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-
-        /* সারাংশ বক্সের ভিতরে মাস নেভিগেশন */
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            border-radius: 6px;
+            color: var(--text);
+        }
+        .icon-btn:active { background: rgba(0,0,0,0.1); }
         .month-nav-row {
-            display: flex; align-items: center; justify-content: center;
-            gap: 10px; margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 14px;
         }
         .month-nav-row button {
-            background: var(--card); border: 1px solid var(--border); color: var(--text);
-            font-size: 16px; cursor: pointer; padding: 5px 10px; border-radius: 8px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 8px;
         }
         .month-nav-row .nav-label {
-            font-size: 18px; font-weight: 700; color: var(--blue); min-width: 70px; text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--blue);
+            min-width: 70px;
+            text-align: center;
         }
-
         .controls {
-            display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 12px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 8px 12px;
         }
         .controls input {
-            flex: 1; min-width: 80px; padding: 10px; border-radius: 10px;
-            border: 1px solid var(--border); background: var(--input-bg);
-            color: var(--text); font-size: 14px;
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text);
+            font-size: 14px;
         }
         .btn {
-            padding: 10px 14px; border: none; border-radius: 10px; cursor: pointer;
-            font-size: 13px; font-weight: 600; color: white; white-space: nowrap;
-            display: inline-flex; align-items: center; gap: 4px;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
         .btn:active { opacity: 0.8; }
         .btn-blue { background: var(--blue); }
@@ -113,60 +211,114 @@
         .btn-orange { background: var(--orange); }
         .btn-purple { background: var(--purple); }
 
-        .tx-list { flex: 1; overflow-y: auto; padding: 0 12px 12px; }
+        .tx-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 12px 12px;
+        }
         .tx-date-header {
-            font-weight: 700; font-size: 16px; padding: 10px 4px; margin: 2px 0;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 10px 4px;
+            margin: 2px 0;
         }
-        .tx-item {
-            display: flex; align-items: center; padding: 12px;
-            margin: 4px 0; background: var(--card); border-radius: 14px;
-            cursor: pointer; gap: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-            border: 1px solid var(--border);
+        .tx-day-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            border: 2px solid var(--light-green);
         }
-        .tx-item:active { opacity: 0.9; }
-        .tx-icon {
-            width: 42px; height: 42px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 17px; flex-shrink: 0;
+        .tx-day-table th {
+            background: var(--bg);
+            padding: 8px 6px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray);
+            border-bottom: 1px solid var(--border);
         }
-        .tx-icon.expense { background: #fce4e4; color: var(--expense); }
-        .tx-icon.income { background: #e6f4ea; color: var(--income); }
-        .tx-info { flex: 1; min-width: 0; }
-        .tx-desc { font-weight: 600; font-size: 15px; }
-        .tx-meta { font-size: 12px; color: var(--gray); }
-        .tx-amount { font-weight: 700; font-size: 16px; text-align: right; }
-        .tx-amount.expense-text { color: var(--expense); }
-        .tx-amount.income-text { color: var(--income); }
-        .tx-delete {
-            background: none; border: none; color: var(--danger);
-            font-size: 16px; cursor: pointer; padding: 4px 8px; border-radius: 4px;
+        .tx-day-table td {
+            padding: 10px 6px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        .tx-day-table tr:last-child td { border-bottom: none; }
+        .tx-day-table tfoot td {
+            font-weight: 700;
+            background: var(--bg);
+            color: var(--text);
+        }
+        .tx-day-table .income-amount { color: var(--income); }
+        .tx-day-table .expense-amount { color: var(--expense); }
+        .tx-day-table .tx-delete-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px 8px;
         }
         .empty { text-align: center; padding: 40px; color: var(--gray); }
 
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 200;
-            justify-content: center; align-items: flex-end;
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 200;
+            justify-content: center;
+            align-items: flex-end;
         }
         .modal.open { display: flex; }
         .modal-box {
-            background: var(--modal-bg); color: var(--text);
-            border-radius: 20px 20px 0 0; padding: 20px;
-            width: 100%; max-width: 500px; max-height: 85vh;
-            overflow-y: auto; animation: slideUp 0.3s ease;
+            background: var(--modal-bg);
+            color: var(--text);
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
         }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .modal-box h3 { margin-bottom: 12px; font-size: 18px; }
-        .modal-box label { display: block; font-size: 13px; font-weight: 600; margin-top: 10px; margin-bottom: 4px; color: var(--gray); }
+        .modal-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            color: var(--gray);
+        }
         .modal-box input, .modal-box select, .modal-box textarea {
-            width: 100%; padding: 10px; border-radius: 10px;
-            border: 1px solid var(--border); background: var(--input-bg);
-            color: var(--text); font-size: 15px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text);
+            font-size: 15px;
+            margin-bottom: 10px;
         }
         .modal-box textarea { resize: vertical; }
         .modal-actions { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; }
         .modal-box .tab-row { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 12px; }
-        .modal-box .tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; font-weight: 600; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+        .modal-box .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
         .modal-box .tab.active { border-bottom-color: var(--blue); color: var(--blue); }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -174,43 +326,172 @@
         .image-preview { margin: 8px 0; text-align: center; }
         .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid var(--border); }
 
-        .report-preview { max-height: 300px; overflow-y: auto; font-size: 13px; }
-        .report-preview table { width: 100%; border-collapse: collapse; }
-        .report-preview th, .report-preview td { border: 1px solid var(--border); padding: 6px; text-align: left; }
+        .report-preview { max-height: 400px; overflow-y: auto; font-size: 13px; }
+        .report-preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            border: 2px solid var(--light-green);
+        }
+        .report-preview th, .report-preview td {
+            border: 1px solid var(--border);
+            padding: 6px;
+            text-align: left;
+        }
         .report-preview th { background: var(--bg); }
 
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .summary-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            color: var(--text);
+        }
+        .summary-btn.income-bg { background: #e6f4ea; color: var(--income); }
+        .summary-btn.expense-bg { background: #fce4e4; color: var(--expense); }
+        .summary-btn.balance-bg { background: #e8f0fe; color: var(--blue); }
+
         .bottom-nav {
-            display: flex; background: var(--card); border-top: 1px solid var(--border);
-            position: sticky; bottom: 0; padding: 6px 0; box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            position: sticky;
+            bottom: 0;
+            padding: 6px 0;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
         }
         .bottom-nav button {
-            flex: 1; display: flex; flex-direction: column; align-items: center;
-            padding: 8px 4px; background: none; border: none; color: var(--gray);
-            font-size: 11px; cursor: pointer; gap: 3px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 11px;
+            cursor: pointer;
+            gap: 3px;
         }
         .bottom-nav button .nav-icon { font-size: 20px; }
         .bottom-nav button.active { color: var(--blue); }
 
         .budget-dropdown {
-            display: none; position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); background: var(--card);
-            border-radius: 16px; padding: 16px; width: 300px; max-width: 90%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 250;
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card);
+            border-radius: 16px;
+            padding: 16px;
+            width: 300px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 250;
             border: 1px solid var(--border);
         }
         .budget-dropdown.open { display: block; }
         .budget-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 0; border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
         }
         .budget-item:last-child { border-bottom: none; }
         .budget-item .cat-name { cursor: pointer; flex: 1; font-weight: 500; font-size: 15px; }
         .budget-item button { background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 8px; font-size: 14px; }
         .budget-item .btn-del { color: var(--danger); }
+
+        .date-widget {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0 8px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .date-widget .date-text {
+            flex: 1;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 0;
+        }
+        .date-widget .date-arrow {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text);
+            padding: 6px;
+            border-radius: 6px;
+        }
+        .date-widget .calendar-icon { font-size: 20px; cursor: pointer; padding: 6px; }
+
+        .calendar-popup {
+            display: none;
+            position: absolute;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            z-index: 300;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            width: 260px;
+            top: 100%; left: 0;
+            margin-top: 4px;
+        }
+        .calendar-popup.open { display: block; }
+        .calendar-popup .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .calendar-popup .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            text-align: center;
+        }
+        .calendar-popup .cal-day { padding: 6px; border-radius: 4px; cursor: pointer; }
+        .calendar-popup .cal-day:hover { background: var(--blue); color: white; }
+        .calendar-popup .cal-day.today { font-weight: 700; border: 1px solid var(--blue); }
+        .calendar-popup .cal-day.selected { background: var(--blue); color: white; }
+
+        .type-toggle { display: flex; gap: 8px; margin-bottom: 10px; }
+        .type-toggle button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .type-toggle button.active { background: var(--blue); color: white; border-color: var(--blue); }
     </style>
 </head>
 <body>
-
     <div class="header">
         <h1>📊 হিসাব খাতা</h1>
         <div class="header-right">
@@ -219,26 +500,26 @@
         </div>
     </div>
 
-    <!-- Two Main Boxes -->
     <div class="top-boxes">
-        <!-- LEFT: Budget Box -->
         <div class="stat-box" id="boxLeft">
-            <!-- টাইটেল সবসময় "বাজেট" -->
             <h3><span>🎯</span> <span>বাজেট</span></h3>
-            <!-- বাজেট বক্সের ভেতরে বাটন -->
             <div class="budget-btns-row">
                 <button class="budget-cat-btn" id="budgetCatBtn">বাজেট ▼</button>
+                <button class="icon-btn" id="editBudgetIcon" title="সম্পাদনা" style="display:none;">✏️</button>
+                <button class="icon-btn" id="deleteBudgetIcon" title="মুছুন" style="display:none;">🗑️</button>
                 <button class="budget-period-btn" id="budgetPeriodBtn">মাসিক ▼</button>
+            </div>
+            <div class="month-nav-row">
+                <button id="budgetPrev">◀</button>
+                <span class="nav-label" id="budgetMonthLabel">মে 26</span>
+                <button id="budgetNext">▶</button>
             </div>
             <div class="stat-row"><span class="stat-label">বাজেট:</span> <span class="stat-value blue" id="leftBudget">৳ 0.00</span></div>
             <div class="stat-row"><span class="stat-label">ব্যয়:</span> <span class="stat-value orange" id="leftSpent">৳ 0.00</span></div>
             <div class="stat-row"><span class="stat-label">টোটাল:</span> <span class="stat-value" id="leftRemain" style="color:var(--income);">৳ 0.00</span></div>
         </div>
-
-        <!-- RIGHT: Summary Box -->
         <div class="stat-box" id="boxRight">
             <h3><span>💰</span> <span>সারাংশ</span></h3>
-            <!-- মাস নেভিগেশন -->
             <div class="month-nav-row">
                 <button id="summaryPrev">◀</button>
                 <span class="nav-label" id="summaryMonthLabel">মে 26</span>
@@ -250,19 +531,16 @@
         </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
         <input type="month" id="monthFilter" style="flex:0;min-width:120px;">
         <input type="text" id="searchInput" placeholder="🔍 সার্চ..." style="flex:1;">
         <button class="btn btn-gray" id="btnResetMonth">রিসেট</button>
     </div>
 
-    <!-- Transaction List -->
     <div class="tx-list" id="txList">
         <div class="empty">📭 কোনো লেনদেন নেই</div>
     </div>
 
-    <!-- Bottom Nav -->
     <div class="bottom-nav">
         <button class="active" data-page="transactions"><span class="nav-icon">📋</span>লেনদেন</button>
         <button data-page="add"><span class="nav-icon">➕</span>নতুন</button>
@@ -274,16 +552,29 @@
     <div class="modal" id="modalTx">
         <div class="modal-box">
             <h3 id="txTitle">নতুন লেনদেন</h3>
-            <label>তারিখ</label><input type="date" id="txDate">
-            <label>বিবরণ</label><input type="text" id="txDesc" placeholder="কিসের জন্য">
-            <label>পরিমাণ (টাকা)</label><input type="number" id="txAmount" placeholder="পরিমাণ" min="0" step="0.01">
-            <label>ধরন</label><select id="txType"><option value="expense">ব্যয়</option><option value="income">আয়</option></select>
-            <label>ক্যাটাগরি</label>
-            <div style="display:flex;gap:6px;"><select id="txCategory" style="flex:1;"></select><button class="btn btn-blue" id="btnAddCat">+</button></div>
-            <label>📸 রশিদ ছবি (ঐচ্ছিক)</label>
-            <div style="display:flex;gap:6px;"><input type="file" id="txImage" accept="image/*" style="flex:1;"><button class="btn btn-green" id="btnCamera" title="ক্যামেরা">📷</button></div>
+            <div class="date-widget" id="txDateWidget">
+                <button class="date-arrow prev">◀</button>
+                <span class="date-text" id="txDateText">DD-MM-YYYY</span>
+                <button class="date-arrow next">▶</button>
+                <span class="calendar-icon" id="txCalendarIcon">📅</span>
+                <div class="calendar-popup" id="txCalendarPopup"></div>
+            </div>
+            <input type="text" id="txDesc" placeholder="বিবরণ">
+            <input type="number" id="txAmount" placeholder="পরিমাণ (টাকা)" min="0" step="0.01">
+            <div class="type-toggle">
+                <button id="btnTypeExpense" class="active">ব্যয়</button>
+                <button id="btnTypeIncome">আয়</button>
+            </div>
+            <div style="display:flex;gap:6px;">
+                <select id="txCategory" style="flex:1;"></select>
+                <button class="btn btn-blue" id="btnAddCat">+</button>
+            </div>
+            <div style="display:flex;gap:6px; margin-top:10px;">
+                <input type="file" id="txImage" accept="image/*" style="flex:1;">
+                <button class="btn btn-green" id="btnCamera" title="ক্যামেরা">📷</button>
+            </div>
             <div class="image-preview" id="imagePreview"></div>
-            <label>নোট (ঐচ্ছিক)</label><textarea id="txNote" rows="2" placeholder="অতিরিক্ত তথ্য"></textarea>
+            <textarea id="txNote" rows="2" placeholder="নোট (ঐচ্ছিক)"></textarea>
             <div class="modal-actions">
                 <button class="btn btn-gray" id="btnCancelTx">বাতিল</button>
                 <button class="btn btn-blue" id="btnSaveTx">সংরক্ষণ</button>
@@ -305,26 +596,35 @@
     <div class="modal" id="modalTools">
         <div class="modal-box">
             <h3>🔧 টুলস</h3>
-            <div style="margin-bottom:12px;"><h4>⚡ Extra</h4>
+            <div style="margin-bottom:12px;">
+                <h4>⚡ Extra</h4>
                 <div style="display:flex;gap:6px;"><input type="date" id="extraDate" style="flex:1;"><input type="number" id="extraAmount" placeholder="টাকা" style="width:100px;"><button class="btn btn-blue" id="btnAddExtra">➕</button></div>
                 <div id="extraList" style="max-height:150px;overflow-y:auto;"></div>
                 <div>মোট: <span id="extraTotal">0</span></div>
                 <button class="btn btn-red" id="btnClearExtra">পরিষ্কার</button>
             </div>
-            <div style="margin-bottom:12px;"><h4>💰 দেনা-পাওনা</h4>
-                <div class="tab-row"><div class="tab active" data-dtab="debt">🔴 দেনা</div><div class="tab" data-dtab="credit">🟢 পাওনা</div></div>
+            <div style="margin-bottom:12px;">
+                <h4>💰 দেনা-পাওনা</h4>
+                <div class="tab-row">
+                    <div class="tab active" data-dtab="debt"> দেনা</div>
+                    <div class="tab" data-dtab="credit"> পাওনা</div>
+                </div>
                 <div class="tab-content active" id="dtab-debt">
                     <div style="display:flex;gap:4px;"><input type="text" id="debtName" placeholder="নাম" style="flex:1;"><input type="number" id="debtAmount" placeholder="টাকা" style="width:90px;"><button class="btn btn-red" id="btnAddDebt">➕</button></div>
-                    <div id="debtList" style="max-height:150px;overflow-y:auto;"></div><div>মোট: <b><span id="debtTotal">0</span></b></div>
+                    <div id="debtList" style="max-height:150px;overflow-y:auto;"></div>
+                    <div>মোট: <b><span id="debtTotal">0</span></b></div>
                 </div>
                 <div class="tab-content" id="dtab-credit">
                     <div style="display:flex;gap:4px;"><input type="text" id="creditName" placeholder="নাম" style="flex:1;"><input type="number" id="creditAmount" placeholder="টাকা" style="width:90px;"><button class="btn btn-green" id="btnAddCredit">➕</button></div>
-                    <div id="creditList" style="max-height:150px;overflow-y:auto;"></div><div>মোট: <b><span id="creditTotal">0</span></b></div>
+                    <div id="creditList" style="max-height:150px;overflow-y:auto;"></div>
+                    <div>মোট: <b><span id="creditTotal">0</span></b></div>
                 </div>
             </div>
-            <div style="margin-bottom:12px;"><h4>📝 খসড়া</h4>
+            <div style="margin-bottom:12px;">
+                <h4>📝 খসড়া</h4>
                 <div style="display:flex;gap:6px;"><input type="text" id="draftItem" placeholder="আইটেম" style="flex:1;"><input type="number" id="draftAmount" placeholder="টাকা" style="width:100px;"><button class="btn btn-purple" id="btnAddDraft">➕</button></div>
-                <div id="draftList" style="max-height:150px;overflow-y:auto;"></div><div>মোট: <b><span id="draftTotal">0</span></b></div>
+                <div id="draftList" style="max-height:150px;overflow-y:auto;"></div>
+                <div>মোট: <b><span id="draftTotal">0</span></b></div>
                 <button class="btn btn-red" id="btnClearDraft">পরিষ্কার</button>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
@@ -354,13 +654,31 @@
     <div class="modal" id="modalBudget">
         <div class="modal-box">
             <h3>🎯 বাজেট সেটিং</h3>
-            <label>ক্যাটাগরি</label><select id="budgetCat"></select>
-            <label>মাসিক বাজেট</label><input type="number" id="budgetMonthly" placeholder="মাসিক বাজেট">
-            <label>সাপ্তাহিক বাজেট</label><input type="number" id="budgetWeekly" placeholder="সাপ্তাহিক বাজেট">
-            <label>বার্ষিক বাজেট</label><input type="number" id="budgetYearly" placeholder="বার্ষিক বাজেট">
+            <div class="date-widget" id="budgetDateWidget">
+                <button class="date-arrow prev">◀</button>
+                <span class="date-text" id="budgetDateText">DD-MM-YYYY</span>
+                <button class="date-arrow next">▶</button>
+                <span class="calendar-icon" id="budgetCalendarIcon">📅</span>
+                <div class="calendar-popup" id="budgetCalendarPopup"></div>
+            </div>
+            <select id="budgetCat"></select>
+            <div id="budgetMonthlyField"><input type="number" id="budgetMonthly" placeholder="মাসিক বাজেট"></div>
+            <div id="budgetWeeklyField" style="display:none;"><input type="number" id="budgetWeekly" placeholder="সাপ্তাহিক বাজেট"></div>
+            <div id="budgetYearlyField" style="display:none;"><input type="number" id="budgetYearly" placeholder="বার্ষিক বাজেট"></div>
             <div class="modal-actions">
                 <button class="btn btn-gray" id="btnCancelBudget">বাতিল</button>
                 <button class="btn btn-blue" id="btnSaveBudget">সংরক্ষণ</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalImportMissing">
+        <div class="modal-box">
+            <h3>⚠️ নতুন খাত পাওয়া গেছে</h3>
+            <p>নিচের খাতগুলো আপনার বর্তমান তালিকায় নেই। প্রয়োজন অনুযায়ী কপি করতে পারেন:</p>
+            <div id="missingCategoriesList" style="max-height:200px;overflow-y:auto;margin:10px 0;"></div>
+            <div class="modal-actions">
+                <button class="btn btn-gray" id="btnCloseMissing">বন্ধ</button>
             </div>
         </div>
     </div>
@@ -372,377 +690,799 @@
         <div class="budget-item"><span class="cat-name" data-period="yearly">বার্ষিক</span></div>
     </div>
 
-<script>
-(function() {
-    'use strict';
-    const LS = { tx:'pwa_ledger_tx', budget:'pwa_ledger_budget', dark:'pwa_ledger_dark', extra:'pwa_ledger_extra', debt:'pwa_ledger_debt', draft:'pwa_ledger_draft', lastCat:'pwa_ledger_lastCat', categories:'pwa_ledger_categories' };
-    function g(k,d){ try{ return JSON.parse(localStorage.getItem(k))||d; }catch{ return d; } }
-    function s(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
+    <script>
+        (function () {
+            'use strict';
+            const LS = { tx: 'pwa_ledger_tx', budget: 'pwa_ledger_budget', dark: 'pwa_ledger_dark', extra: 'pwa_ledger_extra', debt: 'pwa_ledger_debt', draft: 'pwa_ledger_draft', lastCat: 'pwa_ledger_lastCat', categories: 'pwa_ledger_categories' };
+            function g(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } }
+            function s(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
 
-    let transactions = g(LS.tx,[]);
-    let budgets = g(LS.budget,{});
-    let isDark = g(LS.dark,false);
-    let extraEntries = g(LS.extra,[]);
-    let debtData = g(LS.debt,{debt:[],credit:[]});
-    let draftEntries = g(LS.draft,[]);
-    let customCategories = g(LS.categories,[]);
-    let selectedBudgetCat = g(LS.lastCat,null);
-    let budgetPeriod = 'monthly', budgetOffset = 0;
-    let summaryMonthOffset = 0;
-    let editingId = null, currentImageData = null;
-    const DC = ['খাবার','পরিবহন','বাসা ভাড়া','বেতন','চিকিৎসা','শিক্ষা','বিনোদন','খেলনা','অন্যান্য'];
-    const IMG = new Map();
-    transactions.forEach(t=>{ if(t.imageData) IMG.set(t.id,t.imageData); });
-    function id(){ return Date.now().toString(36)+Math.random().toString(36).substr(2,5); }
-    function fm(a){ return '৳ '+(parseFloat(a)||0).toFixed(2); }
-    function ac(){ return [...new Set([...DC,...customCategories])]; }
-    if(isDark) document.body.classList.add('dark');
-    function td(){ isDark=!isDark; document.body.classList.toggle('dark'); s(LS.dark,isDark); }
-
-    function pd(){
-        const n=new Date();
-        let st,en,lb;
-        if(budgetPeriod==='weekly'){
-            const d=n.getDay();
-            st=new Date(n.getFullYear(),n.getMonth(),n.getDate()-d+(budgetOffset*7));
-            en=new Date(st); en.setDate(st.getDate()+6);
-            lb=st.getDate()+' '+st.toLocaleString('bn-BD',{month:'short'})+' - '+en.getDate()+' '+en.toLocaleString('bn-BD',{month:'short'});
-        }else if(budgetPeriod==='monthly'){
-            const t=new Date(n.getFullYear(),n.getMonth()+budgetOffset,1);
-            st=new Date(t.getFullYear(),t.getMonth(),1);
-            en=new Date(t.getFullYear(),t.getMonth()+1,0);
-            lb=t.toLocaleString('bn-BD',{month:'short'})+' '+String(t.getFullYear()).slice(-2);
-        }else{
-            const y=n.getFullYear()+budgetOffset;
-            st=new Date(y,0,1); en=new Date(y,11,31); lb=String(y);
-        }
-        return {s:st.toISOString().split('T')[0], e:en.toISOString().split('T')[0], l:lb};
-    }
-
-    function getSummaryMonthLabel(){
-        const n=new Date();
-        const t=new Date(n.getFullYear(),n.getMonth()+summaryMonthOffset,1);
-        return t.toLocaleString('bn-BD',{month:'short'})+' '+String(t.getFullYear()).slice(-2);
-    }
-
-    function gf(){
-        let d=[...transactions];
-        const m=document.getElementById('monthFilter').value;
-        if(m) d=d.filter(t=>t.date.startsWith(m));
-        const q=document.getElementById('searchInput').value.trim().toLowerCase();
-        if(q) d=d.filter(t=>t.desc.toLowerCase().includes(q)||t.category.toLowerCase().includes(q));
-        return d.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    }
-
-    function getSummaryData(){
-        const n=new Date();
-        const t=new Date(n.getFullYear(),n.getMonth()+summaryMonthOffset,1);
-        const st=new Date(t.getFullYear(),t.getMonth(),1).toISOString().split('T')[0];
-        const en=new Date(t.getFullYear(),t.getMonth()+1,0).toISOString().split('T')[0];
-        return transactions.filter(tx=>tx.date>=st&&tx.date<=en);
-    }
-
-    function cs(){
-        if(!selectedBudgetCat) return 0;
-        const {s:st,e:en}=pd();
-        return transactions.filter(t=>t.type==='expense'&&t.category===selectedBudgetCat&&t.date>=st&&t.date<=en).reduce((a,t)=>a+t.amount,0);
-    }
-
-    function ra(){
-        const c=document.getElementById('txList');
-        const d=gf();
-        c.innerHTML='';
-        if(!d.length){ c.innerHTML='<div class="empty">📭 কোনো লেনদেন নেই</div>'; ub(); return; }
-        const g={};
-        d.forEach(t=>{ if(!g[t.date]) g[t.date]=[]; g[t.date].push(t); });
-        Object.keys(g).sort((a,b)=>b.localeCompare(a)).forEach(dt=>{
-            c.innerHTML+=`<div class="tx-date-header">📅 ${dt}</div>`;
-            g[dt].forEach(tx=>{
-                const hi=IMG.has(tx.id)?'📎 ':'';
-                c.innerHTML+=`<div class="tx-item" data-id="${tx.id}">
-                    <div class="tx-icon ${tx.type}">${tx.type==='income'?'↓':'↑'}</div>
-                    <div class="tx-info"><div class="tx-desc">${hi}${tx.desc}</div><div class="tx-meta">${tx.category}</div></div>
-                    <div class="tx-amount ${tx.type}-text">${fm(tx.amount)}</div>
-                    <button class="tx-delete" data-id="${tx.id}">🗑️</button></div>`;
-            });
-        });
-        ub();
-    }
-
-    function ub(){
-        // সারাংশ বক্স
-        const sd=getSummaryData();
-        let inc=0,exp=0;
-        sd.forEach(t=>{ if(t.type==='income') inc+=t.amount; else exp+=t.amount; });
-        const bal=inc-exp;
-        document.getElementById('rightIncome').textContent=fm(inc);
-        document.getElementById('rightExpense').textContent=fm(exp);
-        const be=document.getElementById('rightBalance');
-        be.textContent=fm(bal);
-        be.style.color=bal<0?'var(--danger)':'var(--blue)';
-        document.getElementById('boxRight').classList.toggle('negative',bal<0);
-        document.getElementById('summaryMonthLabel').textContent=getSummaryMonthLabel();
-
-        // বাজেট বক্স - টাইটেল সবসময় "বাজেট" থাকে
-        const ba=selectedBudgetCat?(budgets[selectedBudgetCat]?.[budgetPeriod]||0):0;
-        const sp=cs();
-        const rm=ba-sp;
-        document.getElementById('leftBudget').textContent=fm(ba);
-        document.getElementById('leftSpent').textContent=fm(sp);
-        const re=document.getElementById('leftRemain');
-        re.textContent=fm(rm);
-        re.style.color=rm>=0?'var(--income)':'var(--danger)';
-        document.getElementById('boxLeft').classList.toggle('negative',rm<0);
-
-        // বাটন টেক্সট: selectedBudgetCat থাকলে সেটার নাম, না থাকলে "বাজেট"
-        document.getElementById('budgetCatBtn').textContent=(selectedBudgetCat||'বাজেট')+' ▼';
-        document.getElementById('budgetPeriodBtn').textContent=(budgetPeriod==='weekly'?'সাপ্তাহিক':budgetPeriod==='yearly'?'বার্ষিক':'মাসিক')+' ▼';
-    }
-
-    function sv(){
-        const dt=document.getElementById('txDate').value;
-        const ds=document.getElementById('txDesc').value.trim();
-        const am=parseFloat(document.getElementById('txAmount').value);
-        const tp=document.getElementById('txType').value;
-        const ct=document.getElementById('txCategory').value;
-        const nt=document.getElementById('txNote').value.trim();
-        if(!dt||!ds||isNaN(am)||am<=0) return alert('সঠিক তথ্য দিন');
-        if(editingId){
-            const i=transactions.findIndex(t=>t.id===editingId);
-            if(i!==-1){ transactions[i]={...transactions[i],date:dt,desc:ds,amount:am,type:tp,category:ct,note:nt,imageData:currentImageData}; if(currentImageData) IMG.set(editingId,currentImageData); else IMG.delete(editingId); }
-            editingId=null;
-        }else{
-            const nid=id();
-            transactions.push({id:nid,date:dt,desc:ds,amount:am,type:tp,category:ct,note:nt,imageData:currentImageData});
-            if(currentImageData) IMG.set(nid,currentImageData);
-        }
-        s(LS.tx,transactions);
-        cm('modalTx'); ra();
-    }
-
-    function cm(mid){ document.getElementById(mid).classList.remove('open'); editingId=null; currentImageData=null; }
-    function ot(){
-        document.getElementById('txTitle').textContent='নতুন লেনদেন';
-        document.getElementById('txDate').value=new Date().toISOString().split('T')[0];
-        document.getElementById('txDesc').value=''; document.getElementById('txAmount').value='';
-        document.getElementById('txType').value='expense'; document.getElementById('txNote').value='';
-        document.getElementById('txImage').value=''; document.getElementById('imagePreview').innerHTML='';
-        currentImageData=null;
-        const sl=document.getElementById('txCategory'); sl.innerHTML='';
-        ac().forEach(c=>sl.innerHTML+=`<option value="${c}">${c}</option>`);
-        document.getElementById('modalTx').classList.add('open');
-    }
-    function et(tx){
-        editingId=tx.id;
-        document.getElementById('txTitle').textContent='লেনদেন সম্পাদনা';
-        document.getElementById('txDate').value=tx.date; document.getElementById('txDesc').value=tx.desc;
-        document.getElementById('txAmount').value=tx.amount; document.getElementById('txType').value=tx.type;
-        document.getElementById('txNote').value=tx.note||''; document.getElementById('txImage').value='';
-        currentImageData=IMG.get(tx.id)||null;
-        document.getElementById('imagePreview').innerHTML=currentImageData?`<img src="${currentImageData}">`:'';
-        const sl=document.getElementById('txCategory'); sl.innerHTML='';
-        ac().forEach(c=>sl.innerHTML+=`<option value="${c}" ${c===tx.category?'selected':''}>${c}</option>`);
-        document.getElementById('modalTx').classList.add('open');
-    }
-    function ri(file){
-        return new Promise((rs,rj)=>{
-            const fr=new FileReader();
-            fr.onload=function(e){
-                const im=new Image();
-                im.onload=function(){
-                    const mx=800; let w=im.width,h=im.height;
-                    if(w>mx){ h=Math.round((mx/w)*h); w=mx; }
-                    const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
-                    cv.getContext('2d').drawImage(im,0,0,w,h);
-                    rs(cv.toDataURL('image/jpeg',0.7));
-                };
-                im.onerror=()=>rj(new Error('err'));
-                im.src=e.target.result;
-            };
-            fr.onerror=()=>rj(new Error('err'));
-            fr.readAsDataURL(file);
-        });
-    }
-
-    document.getElementById('btnDark').addEventListener('click',td);
-    document.getElementById('txList').addEventListener('click',function(e){
-        const it=e.target.closest('.tx-item');
-        if(!it) return;
-        if(e.target.classList.contains('tx-delete')){
-            e.stopPropagation();
-            if(confirm('মুছে ফেলবেন?')){
-                transactions=transactions.filter(t=>t.id!==e.target.dataset.id);
-                IMG.delete(e.target.dataset.id); s(LS.tx,transactions); ra();
+            let transactions = g(LS.tx, []);
+            let budgets = g(LS.budget, {});
+            let migrated = false;
+            for (const cat in budgets) {
+                const val = budgets[cat];
+                if (typeof val.monthly === 'number' || typeof val.weekly === 'number' || typeof val.yearly === 'number') {
+                    const newVal = { monthly: {}, weekly: {}, yearly: {} };
+                    if (typeof val.monthly === 'number') newVal.monthly[getCurrentMonthKey()] = val.monthly;
+                    if (typeof val.weekly === 'number') newVal.weekly[getCurrentWeekKey()] = val.weekly;
+                    if (typeof val.yearly === 'number') newVal.yearly[String(new Date().getFullYear())] = val.yearly;
+                    budgets[cat] = newVal;
+                    migrated = true;
+                }
             }
-            return;
-        }
-        const tx=transactions.find(t=>t.id===it.dataset.id);
-        if(tx) et(tx);
-    });
-    document.getElementById('btnSaveTx').addEventListener('click',sv);
-    document.getElementById('btnCancelTx').addEventListener('click',()=>cm('modalTx'));
-    document.getElementById('btnAddCat').addEventListener('click',()=>{
-        const n=prompt('নতুন ক্যাটাগরি:');
-        if(n&&n.trim()&&!ac().includes(n.trim())){
-            customCategories.push(n.trim()); s(LS.categories,customCategories);
-            const sl=document.getElementById('txCategory'); sl.innerHTML='';
-            ac().forEach(c=>sl.innerHTML+=`<option value="${c}">${c}</option>`);
-        }
-    });
-    document.getElementById('btnCamera').addEventListener('click',()=>{
-        const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.capture='environment';
-        inp.addEventListener('change',e=>{ if(e.target.files[0]) ri(e.target.files[0]).then(b64=>{ currentImageData=b64; document.getElementById('imagePreview').innerHTML=`<img src="${b64}">`; }); });
-        inp.click();
-    });
-    document.getElementById('txImage').addEventListener('change',function(){ if(this.files[0]) ri(this.files[0]).then(b64=>{ currentImageData=b64; document.getElementById('imagePreview').innerHTML=`<img src="${b64}">`; }).catch(()=>{}); });
-    document.getElementById('btnCloseImage').addEventListener('click',()=>cm('modalImageView'));
-    document.getElementById('btnSaveImage').addEventListener('click',()=>{
-        const im=document.getElementById('viewImage');
-        if(im.src&&im.src.startsWith('data:')){ const a=document.createElement('a'); a.href=im.src; a.download='receipt.jpg'; a.click(); }
-    });
+            if (migrated) s(LS.budget, budgets);
 
-    document.querySelectorAll('.bottom-nav button').forEach(b=>{
-        b.addEventListener('click',function(){
-            document.querySelectorAll('.bottom-nav button').forEach(x=>x.classList.remove('active'));
-            this.classList.add('active');
-            if(this.dataset.page==='add') ot();
-            else if(this.dataset.page==='report') orp();
-            else if(this.dataset.page==='tools') otl();
-        });
-    });
+            let isDark = g(LS.dark, false);
+            let extraEntries = g(LS.extra, []);
+            let debtData = g(LS.debt, { debt: [], credit: [] });
+            let draftEntries = g(LS.draft, []);
+            let customCategories = g(LS.categories, []);
+            let selectedBudgetCat = g(LS.lastCat, null);
+            let budgetPeriod = 'monthly', budgetOffset = 0;
+            let summaryMonthOffset = 0;
+            let editingId = null, currentImageData = null;
+            let budgetCustomDate = null;
+            let txCustomDate = new Date();
+            let budgetNavMonthOffset = 0;
 
-    function otl(){ rex(); rdb('debt'); rdb('credit'); rdf(); document.getElementById('modalTools').classList.add('open'); }
-    function rex(){
-        const c=document.getElementById('extraList'); c.innerHTML=extraEntries.length?'':'<p>কোনো এন্ট্রি নেই</p>'; let t=0;
-        extraEntries.forEach(e=>{ t+=e.amount; c.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:4px;border-bottom:1px solid var(--border);"><span>${e.date} - ${fm(e.amount)}</span><button class="del-extra" data-id="${e.id}" style="color:var(--danger);background:none;border:none;cursor:pointer;">🗑️</button></div>`; });
-        document.getElementById('extraTotal').textContent=t.toFixed(2);
-    }
-    document.getElementById('btnAddExtra').addEventListener('click',()=>{ const d=document.getElementById('extraDate').value; const a=parseFloat(document.getElementById('extraAmount').value); if(!d||isNaN(a)||a<=0) return alert('তারিখ ও টাকা দিন'); extraEntries.push({id:id(),date:d,amount:a}); s(LS.extra,extraEntries); rex(); document.getElementById('extraAmount').value=''; });
-    document.getElementById('extraList').addEventListener('click',function(e){ if(e.target.classList.contains('del-extra')){ extraEntries=extraEntries.filter(x=>x.id!==e.target.dataset.id); s(LS.extra,extraEntries); rex(); } });
-    document.getElementById('btnClearExtra').addEventListener('click',()=>{ if(confirm('সব মুছবেন?')){ extraEntries=[]; s(LS.extra,extraEntries); rex(); } });
+            const DC = ['খাবার', 'পরিবহন', 'বাসা ভাড়া', 'বেতন', 'চিকিৎসা', 'শিক্ষা', 'বিনোদন', 'খেলনা', 'অন্যান্য'];
+            const IMG = new Map();
+            transactions.forEach(t => { if (t.imageData) IMG.set(t.id, t.imageData); });
 
-    function rdb(tb){ const c=document.getElementById(tb+'List'); const es=debtData[tb]||[]; c.innerHTML=es.length?'':'<p>কোনো এন্ট্রি নেই</p>'; let t=0; es.forEach(e=>{ t+=e.amount; c.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:4px;border-bottom:1px solid var(--border);"><span>${e.name} - ${fm(e.amount)}</span><button class="del-debt" data-tab="${tb}" data-id="${e.id}" style="color:var(--danger);background:none;border:none;cursor:pointer;">🗑️</button></div>`; }); document.getElementById(tb+'Total').textContent=t.toFixed(2); }
-    document.getElementById('btnAddDebt').addEventListener('click',()=>adb('debt'));
-    document.getElementById('btnAddCredit').addEventListener('click',()=>adb('credit'));
-    function adb(tb){ const n=document.getElementById(tb+'Name').value.trim(); const a=parseFloat(document.getElementById(tb+'Amount').value); if(!n||isNaN(a)||a<=0) return alert('নাম ও টাকা দিন'); debtData[tb].push({id:id(),name:n,amount:a}); s(LS.debt,debtData); rdb(tb); document.getElementById(tb+'Name').value=''; document.getElementById(tb+'Amount').value=''; }
-    document.getElementById('debtList').addEventListener('click',function(e){ if(e.target.classList.contains('del-debt')){ const tb=e.target.dataset.tab; debtData[tb]=debtData[tb].filter(x=>x.id!==e.target.dataset.id); s(LS.debt,debtData); rdb(tb); } });
-    document.getElementById('creditList').addEventListener('click',function(e){ if(e.target.classList.contains('del-debt')){ const tb=e.target.dataset.tab; debtData[tb]=debtData[tb].filter(x=>x.id!==e.target.dataset.id); s(LS.debt,debtData); rdb(tb); } });
-    document.querySelectorAll('#modalTools .tab').forEach(tb=>{ tb.addEventListener('click',function(){ document.querySelectorAll('#modalTools .tab, #modalTools .tab-content').forEach(el=>el.classList.remove('active')); this.classList.add('active'); document.getElementById('dtab-'+this.dataset.dtab).classList.add('active'); }); });
+            function id() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
+            function fm(a) { return '৳ ' + (parseFloat(a) || 0).toFixed(2); }
+            function ac() { return [...new Set([...DC, ...customCategories])]; }
+            if (isDark) document.body.classList.add('dark');
+            function td() { isDark = !isDark; document.body.classList.toggle('dark'); s(LS.dark, isDark); }
 
-    function rdf(){ const c=document.getElementById('draftList'); c.innerHTML=draftEntries.length?'':'<p>কোনো আইটেম নেই</p>'; let t=0; draftEntries.forEach(e=>{ t+=e.amount; c.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:4px;border-bottom:1px solid var(--border);"><span>${e.item} - ${fm(e.amount)}</span><button class="del-draft" data-id="${e.id}" style="color:var(--danger);background:none;border:none;cursor:pointer;">🗑️</button></div>`; }); document.getElementById('draftTotal').textContent=t.toFixed(2); }
-    document.getElementById('btnAddDraft').addEventListener('click',()=>{ const it=document.getElementById('draftItem').value.trim(); const am=parseFloat(document.getElementById('draftAmount').value); if(!it||isNaN(am)||am<=0) return alert('আইটেম ও টাকা দিন'); draftEntries.push({id:id(),item:it,amount:am}); s(LS.draft,draftEntries); rdf(); document.getElementById('draftItem').value=''; document.getElementById('draftAmount').value=''; });
-    document.getElementById('draftList').addEventListener('click',function(e){ if(e.target.classList.contains('del-draft')){ draftEntries=draftEntries.filter(x=>x.id!==e.target.dataset.id); s(LS.draft,draftEntries); rdf(); } });
-    document.getElementById('btnClearDraft').addEventListener('click',()=>{ if(confirm('সব মুছবেন?')){ draftEntries=[]; s(LS.draft,draftEntries); rdf(); } });
-    document.getElementById('btnCloseTools').addEventListener('click',()=>cm('modalTools'));
+            function getCurrentMonthKey() {
+                const now = new Date();
+                return now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+            }
+            function getCurrentWeekKey() {
+                const now = new Date();
+                const day = now.getDay();
+                const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day);
+                return sunday.toISOString().split('T')[0];
+            }
+            function getPeriodKey(period, offset) {
+                const now = new Date();
+                if (period === 'monthly') {
+                    const d = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+                    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+                } else if (period === 'weekly') {
+                    const day = now.getDay();
+                    const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day + offset * 7);
+                    return sunday.toISOString().split('T')[0];
+                } else if (period === 'yearly') {
+                    return String(now.getFullYear() + offset);
+                }
+            }
+            function getPeriodKeyFromDate(period, date) {
+                if (period === 'monthly') {
+                    return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0');
+                } else if (period === 'weekly') {
+                    const day = date.getDay();
+                    const sunday = new Date(date.getFullYear(), date.getMonth(), date.getDate() - day);
+                    return sunday.toISOString().split('T')[0];
+                } else if (period === 'yearly') {
+                    return String(date.getFullYear());
+                }
+            }
 
-    document.getElementById('btnExportCSV').addEventListener('click',()=>{ const d=gf(); if(!d.length) return alert('ডেটা নেই'); let csv='\uFEFFতারিখ,বিবরণ,ক্যাটাগরি,ধরন,পরিমাণ,নোট\n'; d.forEach(t=>csv+=[t.date,`"${t.desc}"`,t.category,t.type==='income'?'আয়':'ব্যয়',t.amount,`"${t.note||''}"`].join(',')+'\n'); const b=new Blob([csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='হিসাব.csv'; a.click(); });
-    document.getElementById('btnBackup').addEventListener('click',()=>{ if(!transactions.length) return alert('ডেটা নেই'); const b=new Blob([JSON.stringify(transactions)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='ব্যাকআপ.json'; a.click(); });
-    document.getElementById('btnRestore').addEventListener('click',()=>document.getElementById('backupFile').click());
-    document.getElementById('backupFile').addEventListener('change',function(e){ if(!e.target.files[0]) return; const r=new FileReader(); r.onload=function(ev){ try{ const d=JSON.parse(ev.target.result); if(Array.isArray(d)&&confirm('ডেটা রিপ্লেস করবেন?')){ transactions=d; IMG.clear(); transactions.forEach(t=>{ if(t.imageData) IMG.set(t.id,t.imageData); }); s(LS.tx,transactions); ra(); } }catch{} }; r.readAsText(e.target.files[0]); });
-    document.getElementById('btnClearAll').addEventListener('click',()=>{ if(transactions.length&&confirm('সব লেনদেন মুছবেন?')){ transactions=[]; IMG.clear(); s(LS.tx,transactions); ra(); } });
+            function pd() {
+                const n = budgetCustomDate || new Date();
+                let st, en, lb;
+                if (budgetPeriod === 'weekly') {
+                    const d = n.getDay();
+                    st = new Date(n.getFullYear(), n.getMonth(), n.getDate() - d + (budgetOffset * 7));
+                    en = new Date(st); en.setDate(st.getDate() + 6);
+                    lb = st.getDate() + ' ' + st.toLocaleString('bn-BD', { month: 'short' }) + ' - ' + en.getDate() + ' ' + en.toLocaleString('bn-BD', { month: 'short' });
+                } else if (budgetPeriod === 'monthly') {
+                    const t = new Date(n.getFullYear(), n.getMonth() + budgetOffset, 1);
+                    st = new Date(t.getFullYear(), t.getMonth(), 1);
+                    en = new Date(t.getFullYear(), t.getMonth() + 1, 0);
+                    lb = t.toLocaleString('bn-BD', { month: 'short' }) + ' ' + String(t.getFullYear()).slice(-2);
+                } else {
+                    const y = n.getFullYear() + budgetOffset;
+                    st = new Date(y, 0, 1); en = new Date(y, 11, 31); lb = String(y);
+                }
+                return { s: st.toISOString().split('T')[0], e: en.toISOString().split('T')[0], l: lb };
+            }
 
-    function orp(){
-        const v=document.getElementById('monthFilter').value;
-        const lb=v?(()=>{ const [y,m]=v.split('-').map(Number); return new Date(y,m-1,1).toLocaleString('bn-BD',{month:'long',year:'numeric'}); })():new Date().toLocaleString('bn-BD',{month:'long',year:'numeric'});
-        document.getElementById('reportMonthLabel').textContent='- '+lb;
-        const d=v?transactions.filter(t=>t.date.startsWith(v)):transactions;
-        const inc=d.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
-        const exp=d.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
-        let h=`<p><b>মোট আয়:</b> ${fm(inc)} | <b>মোট ব্যয়:</b> ${fm(exp)} | <b>ব্যালেন্স:</b> ${fm(inc-exp)}</p>`;
-        h+='<table><thead><tr><th>তারিখ</th><th>বিবরণ</th><th>ধরন</th><th>পরিমাণ</th></tr></thead><tbody>';
-        d.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(t=>{ h+=`<tr><td>${t.date}</td><td>${t.desc}</td><td>${t.type==='income'?'আয়':'ব্যয়'}</td><td style="text-align:right;">${fm(t.amount)}</td></tr>`; });
-        h+='</tbody></table>';
-        document.getElementById('reportPreview').innerHTML=h;
-        document.getElementById('modalReport').classList.add('open');
-    }
-    document.getElementById('btnPrintReport').addEventListener('click',()=>{ const w=window.open('','_blank'); w.document.write(`<!DOCTYPE html><html><head><title>হিসাব রিপোর্ট</title><style>body{font-family:sans-serif;padding:16px;}table{border-collapse:collapse;width:100%;}th,td{border:1px solid #ccc;padding:6px;}</style></head><body>${document.getElementById('reportPreview').innerHTML}</body></html>`); w.document.close(); w.focus(); w.print(); });
-    document.getElementById('btnDownloadExcel').addEventListener('click',()=>{ const h=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"></head><body>${document.getElementById('reportPreview').innerHTML}</body></html>`; const b=new Blob([h],{type:'application/vnd.ms-excel'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='হিসাব.xls'; a.click(); });
-    document.getElementById('btnShareReport').addEventListener('click',async()=>{ const t=document.getElementById('reportPreview').innerText; if(navigator.share){ try{ await navigator.share({title:'হিসাব রিপোর্ট',text:t}); }catch{} }else{ await navigator.clipboard.writeText(t); alert('কপি করা হয়েছে!'); } });
-    document.getElementById('btnCloseReport').addEventListener('click',()=>cm('modalReport'));
+            function getSummaryMonthLabel() {
+                const n = new Date();
+                const t = new Date(n.getFullYear(), n.getMonth() + summaryMonthOffset, 1);
+                return t.toLocaleString('bn-BD', { month: 'short' }) + ' ' + String(t.getFullYear()).slice(-2);
+            }
 
-    // বাজেট ক্যাটাগরি ড্রপডাউন
-    document.getElementById('budgetCatBtn').addEventListener('click',function(e){
-        e.stopPropagation();
-        const dd=document.getElementById('budgetDropdown'); let h='';
-        if(selectedBudgetCat&&budgets[selectedBudgetCat]){
-            const oc=Object.keys(budgets).filter(c=>c!==selectedBudgetCat);
-            oc.forEach(c=>{ h+=`<div class="budget-item"><span class="cat-name" data-cat="${c}">${c}</span><button class="btn-del" data-cat="${c}">✕</button></div>`; });
-            if(!oc.length) h+='<p style="text-align:center;">অন্য বাজেট নেই</p>';
-        }else{
-            const cs=Object.keys(budgets);
-            cs.forEach(c=>{ h+=`<div class="budget-item"><span class="cat-name" data-cat="${c}">${c}</span><button class="btn-del" data-cat="${c}">✕</button></div>`; });
-            if(!cs.length) h+='<p style="text-align:center;">কোনো বাজেট নেই</p>';
-        }
-        h+=`<div style="text-align:center;margin-top:8px;"><button class="btn btn-blue" id="btnAddBudget">+ নতুন বাজেট</button></div>`;
-        dd.innerHTML=h; dd.classList.add('open');
-        document.getElementById('periodDropdown').classList.remove('open');
-    });
+            function gf() {
+                let d = [...transactions];
+                const m = document.getElementById('monthFilter').value;
+                if (m) d = d.filter(t => t.date.startsWith(m));
+                const q = document.getElementById('searchInput').value.trim().toLowerCase();
+                if (q) d = d.filter(t => t.desc.toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
+                return d.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
 
-    // পিরিয়ড ড্রপডাউন
-    document.getElementById('budgetPeriodBtn').addEventListener('click',function(e){
-        e.stopPropagation();
-        document.getElementById('periodDropdown').classList.toggle('open');
-        document.getElementById('budgetDropdown').classList.remove('open');
-    });
+            function getSummaryData() {
+                const n = new Date();
+                const t = new Date(n.getFullYear(), n.getMonth() + summaryMonthOffset, 1);
+                const st = new Date(t.getFullYear(), t.getMonth(), 1).toISOString().split('T')[0];
+                const en = new Date(t.getFullYear(), t.getMonth() + 1, 0).toISOString().split('T')[0];
+                return transactions.filter(tx => tx.date >= st && tx.date <= en);
+            }
 
-    // বাজেট ড্রপডাউন ক্লিক
-    document.getElementById('budgetDropdown').addEventListener('click',function(e){
-        e.stopPropagation();
-        if(e.target.classList.contains('cat-name')){
-            const c=e.target.dataset.cat; selectedBudgetCat=c; budgetPeriod='monthly'; budgetOffset=0; s(LS.lastCat,c);
-            document.getElementById('budgetDropdown').classList.remove('open'); ra();
-        }else if(e.target.classList.contains('btn-del')){
-            const c=e.target.dataset.cat;
-            if(confirm(`"${c}" বাজেট মুছবেন?`)){ delete budgets[c]; if(selectedBudgetCat===c){ selectedBudgetCat=null; s(LS.lastCat,null); } s(LS.budget,budgets); document.getElementById('budgetDropdown').classList.remove('open'); ra(); }
-        }else if(e.target.id==='btnAddBudget'){ document.getElementById('budgetDropdown').classList.remove('open'); obm(null); }
-    });
+            function cs() {
+                if (!selectedBudgetCat) return 0;
+                const { s: st, e: en } = pd();
+                return transactions.filter(t => t.type === 'expense' && t.category === selectedBudgetCat && t.date >= st && t.date <= en).reduce((a, t) => a + t.amount, 0);
+            }
 
-    // পিরিয়ড ড্রপডাউন ক্লিক
-    document.getElementById('periodDropdown').addEventListener('click',function(e){
-        e.stopPropagation();
-        if(e.target.classList.contains('cat-name')){
-            budgetPeriod=e.target.dataset.period; budgetOffset=0;
-            document.getElementById('periodDropdown').classList.remove('open'); ra();
-        }
-    });
+            function ra() {
+                const container = document.getElementById('txList');
+                const d = gf();
+                container.innerHTML = '';
+                if (!d.length) { container.innerHTML = '<div class="empty">📭 কোনো লেনদেন নেই</div>'; ub(); return; }
+                const groups = {};
+                d.forEach(t => { if (!groups[t.date]) groups[t.date] = []; groups[t.date].push(t); });
+                Object.keys(groups).sort((a, b) => b.localeCompare(a)).forEach(date => {
+                    container.innerHTML += `<div class="tx-date-header">📅 ${date}</div>`;
+                    const txns = groups[date];
+                    let dayIncome = 0, dayExpense = 0;
+                    let table = `<table class="tx-day-table"><thead><tr>
+                        <th>বিবরণ</th><th>ক্যাটাগরি</th><th>আয়</th><th>ব্যয়</th><th></th>
+                    </tr></thead><tbody>`;
+                    txns.forEach(tx => {
+                        const incomeAmt = tx.type === 'income' ? tx.amount : 0;
+                        const expenseAmt = tx.type === 'expense' ? tx.amount : 0;
+                        dayIncome += incomeAmt;
+                        dayExpense += expenseAmt;
+                        table += `<tr data-id="${tx.id}" style="cursor:pointer;">
+                            <td>${tx.desc}</td>
+                            <td>${tx.category}</td>
+                            <td class="income-amount">${incomeAmt ? fm(incomeAmt) : ''}</td>
+                            <td class="expense-amount">${expenseAmt ? fm(expenseAmt) : ''}</td>
+                            <td><button class="tx-delete-btn" data-id="${tx.id}">🗑️</button></td>
+                        </tr>`;
+                    });
+                    table += `</tbody><tfoot><tr>
+                        <td colspan="2"><strong>দিনের যোগফল</strong></td>
+                        <td class="income-amount"><strong>${fm(dayIncome)}</strong></td>
+                        <td class="expense-amount"><strong>${fm(dayExpense)}</strong></td>
+                        <td></td>
+                    </tr></tfoot></table>`;
+                    container.innerHTML += table;
+                });
+                ub();
+            }
 
-    document.addEventListener('click',function(e){
-        document.getElementById('budgetDropdown').classList.remove('open');
-        document.getElementById('periodDropdown').classList.remove('open');
-    });
+            function ub() {
+                const sd = getSummaryData();
+                let inc = 0, exp = 0;
+                sd.forEach(t => { if (t.type === 'income') inc += t.amount; else exp += t.amount; });
+                const bal = inc - exp;
+                document.getElementById('rightIncome').textContent = fm(inc);
+                document.getElementById('rightExpense').textContent = fm(exp);
+                const be = document.getElementById('rightBalance');
+                be.textContent = fm(bal);
+                be.style.color = bal < 0 ? 'var(--danger)' : 'var(--blue)';
+                document.getElementById('boxRight').classList.toggle('negative', bal < 0);
+                document.getElementById('summaryMonthLabel').textContent = getSummaryMonthLabel();
 
-    // সারাংশ মাস নেভিগেশন
-    document.getElementById('summaryPrev').addEventListener('click',()=>{ summaryMonthOffset--; ra(); });
-    document.getElementById('summaryNext').addEventListener('click',()=>{ if(summaryMonthOffset<0){ summaryMonthOffset++; ra(); } });
+                const now = new Date();
+                const navDate = new Date(now.getFullYear(), now.getMonth() + budgetNavMonthOffset, 1);
+                document.getElementById('budgetMonthLabel').textContent = navDate.toLocaleString('bn-BD', { month: 'short' }) + ' ' + String(navDate.getFullYear()).slice(-2);
 
-    function obm(cat){
-        const sl=document.getElementById('budgetCat'); sl.innerHTML='';
-        ac().forEach(c=>sl.innerHTML+=`<option value="${c}" ${c===cat?'selected':''}>${c}</option>`);
-        document.getElementById('budgetMonthly').value=(budgets[cat]||{}).monthly||'';
-        document.getElementById('budgetWeekly').value=(budgets[cat]||{}).weekly||'';
-        document.getElementById('budgetYearly').value=(budgets[cat]||{}).yearly||'';
-        document.getElementById('modalBudget').classList.add('open');
-    }
-    document.getElementById('btnSaveBudget').addEventListener('click',()=>{
-        const c=document.getElementById('budgetCat').value;
-        budgets[c]={ monthly:parseFloat(document.getElementById('budgetMonthly').value)||0, weekly:parseFloat(document.getElementById('budgetWeekly').value)||0, yearly:parseFloat(document.getElementById('budgetYearly').value)||0 };
-        s(LS.budget,budgets);
-        if(!selectedBudgetCat){ selectedBudgetCat=c; s(LS.lastCat,c); }
-        cm('modalBudget'); ra();
-    });
-    document.getElementById('btnCancelBudget').addEventListener('click',()=>cm('modalBudget'));
+                let budgetAmount = 0;
+                if (selectedBudgetCat && budgets[selectedBudgetCat]) {
+                    const key = budgetPeriod === 'monthly' ? getPeriodKey('monthly', budgetNavMonthOffset) : getPeriodKey(budgetPeriod, budgetOffset);
+                    budgetAmount = budgets[selectedBudgetCat]?.[budgetPeriod]?.[key] || 0;
+                }
+                const sp = cs();
+                const rm = budgetAmount - sp;
+                document.getElementById('leftBudget').textContent = fm(budgetAmount);
+                document.getElementById('leftSpent').textContent = fm(sp);
+                const re = document.getElementById('leftRemain');
+                re.textContent = fm(rm);
+                re.style.color = rm >= 0 ? 'var(--income)' : 'var(--danger)';
+                document.getElementById('boxLeft').classList.toggle('negative', rm < 0);
 
-    document.getElementById('searchInput').addEventListener('input',ra);
-    document.getElementById('monthFilter').addEventListener('change',ra);
-    document.getElementById('btnResetMonth').addEventListener('click',()=>{ document.getElementById('monthFilter').value=''; ra(); });
-    document.querySelectorAll('.modal').forEach(m=>{ m.addEventListener('click',function(e){ if(e.target===m) m.classList.remove('open'); }); });
+                document.getElementById('budgetCatBtn').textContent = (selectedBudgetCat || 'বাজেট') + ' ▼';
+                document.getElementById('budgetPeriodBtn').textContent = (budgetPeriod === 'weekly' ? 'সাপ্তাহিক' : budgetPeriod === 'yearly' ? 'বার্ষিক' : 'মাসিক') + ' ▼';
+                document.getElementById('editBudgetIcon').style.display = selectedBudgetCat ? 'inline-block' : 'none';
+                document.getElementById('deleteBudgetIcon').style.display = selectedBudgetCat ? 'inline-block' : 'none';
+            }
 
-    window.addEventListener('beforeinstallprompt',(e)=>{ e.preventDefault(); window.deferredPrompt=e; document.getElementById('btnInstall').style.display='flex'; });
-    window.addEventListener('appinstalled',()=>{ document.getElementById('btnInstall').style.display='none'; });
-    if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
+            function formatDDMMYYYY(date) {
+                const d = date.getDate().toString().padStart(2, '0');
+                const m = (date.getMonth() + 1).toString().padStart(2, '0');
+                const y = date.getFullYear();
+                return `${d}-${m}-${y}`;
+            }
+            function parseDDMMYYYY(str) {
+                const parts = str.split('-');
+                if (parts.length === 3) return new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+                return new Date();
+            }
+            function updateDateWidget(widgetId, date) {
+                document.getElementById(widgetId + 'Text').textContent = formatDDMMYYYY(date);
+            }
+            function getDateFromWidget(widgetId) {
+                return parseDDMMYYYY(document.getElementById(widgetId + 'Text').textContent);
+            }
+            function setDateWidget(widgetId, date) { updateDateWidget(widgetId, date); }
 
-    ra();
-})();
-</script>
+            function openCalendar(widgetId, date) {
+                const popup = document.getElementById(widgetId + 'CalendarPopup');
+                if (!popup) return;
+                const year = date.getFullYear();
+                const month = date.getMonth();
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                let html = '<div class="cal-header">';
+                html += `<button class="cal-nav" data-dir="prev">◀</button>`;
+                html += `<span>${date.toLocaleString('bn-BD', { month: 'long', year: 'numeric' })}</span>`;
+                html += `<button class="cal-nav" data-dir="next">▶</button></div>`;
+                html += '<div class="cal-grid"><div>রবি</div><div>সোম</div><div>মঙ্গল</div><div>বুধ</div><div>বৃহঃ</div><div>শুক্র</div><div>শনি</div>';
+                for (let i = 0; i < firstDay; i++) html += '<div></div>';
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const cur = new Date(year, month, d);
+                    const isToday = cur.toDateString() === new Date().toDateString();
+                    const isSelected = cur.toDateString() === date.toDateString();
+                    html += `<div class="cal-day${isToday?' today':''}${isSelected?' selected':''}" data-day="${d}">${d}</div>`;
+                }
+                html += '</div>';
+                popup.innerHTML = html;
+                popup.classList.add('open');
+                popup._widgetId = widgetId;
+            }
+            function closeAllCalendars() {
+                document.querySelectorAll('.calendar-popup.open').forEach(p => p.classList.remove('open'));
+            }
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.calendar-popup') && !e.target.closest('.calendar-icon')) closeAllCalendars();
+            });
+
+            document.getElementById('budgetPrev').addEventListener('click', () => {
+                budgetNavMonthOffset--;
+                budgetOffset = budgetNavMonthOffset;
+                budgetPeriod = 'monthly';
+                budgetCustomDate = null;
+                ra();
+            });
+            document.getElementById('budgetNext').addEventListener('click', () => {
+                budgetNavMonthOffset++;
+                budgetOffset = budgetNavMonthOffset;
+                budgetPeriod = 'monthly';
+                budgetCustomDate = null;
+                ra();
+            });
+
+            document.getElementById('periodDropdown').addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (e.target.classList.contains('cat-name')) {
+                    budgetPeriod = e.target.dataset.period;
+                    budgetOffset = 0; budgetNavMonthOffset = 0; budgetCustomDate = null;
+                    document.getElementById('periodDropdown').classList.remove('open');
+                    ra();
+                }
+            });
+
+            let txTypeValue = 'expense';
+            document.getElementById('btnTypeExpense').addEventListener('click', function () {
+                txTypeValue = 'expense';
+                this.classList.add('active');
+                document.getElementById('btnTypeIncome').classList.remove('active');
+            });
+            document.getElementById('btnTypeIncome').addEventListener('click', function () {
+                txTypeValue = 'income';
+                this.classList.add('active');
+                document.getElementById('btnTypeExpense').classList.remove('active');
+            });
+
+            function sv() {
+                const ds = document.getElementById('txDesc').value.trim();
+                const am = parseFloat(document.getElementById('txAmount').value);
+                const tp = txTypeValue;
+                const ct = document.getElementById('txCategory').value;
+                const nt = document.getElementById('txNote').value.trim();
+                const dateStr = txCustomDate.toISOString().split('T')[0];
+                if (!ds || isNaN(am) || am <= 0) return alert('সঠিক তথ্য দিন');
+                if (editingId) {
+                    const i = transactions.findIndex(t => t.id === editingId);
+                    if (i !== -1) {
+                        transactions[i] = { ...transactions[i], date: dateStr, desc: ds, amount: am, type: tp, category: ct, note: nt, imageData: currentImageData };
+                        if (currentImageData) IMG.set(editingId, currentImageData); else IMG.delete(editingId);
+                    }
+                    editingId = null;
+                } else {
+                    const nid = id();
+                    transactions.push({ id: nid, date: dateStr, desc: ds, amount: am, type: tp, category: ct, note: nt, imageData: currentImageData });
+                    if (currentImageData) IMG.set(nid, currentImageData);
+                }
+                s(LS.tx, transactions);
+                cm('modalTx'); ra();
+            }
+
+            function cm(mid) { document.getElementById(mid).classList.remove('open'); editingId = null; currentImageData = null; }
+            function ot() {
+                document.getElementById('txTitle').textContent = 'নতুন লেনদেন';
+                txCustomDate = new Date();
+                updateDateWidget('txDate', txCustomDate);
+                document.getElementById('txDesc').value = ''; document.getElementById('txAmount').value = '';
+                txTypeValue = 'expense';
+                document.getElementById('btnTypeExpense').classList.add('active');
+                document.getElementById('btnTypeIncome').classList.remove('active');
+                document.getElementById('txNote').value = '';
+                document.getElementById('txImage').value = ''; document.getElementById('imagePreview').innerHTML = '';
+                currentImageData = null;
+                const sl = document.getElementById('txCategory'); sl.innerHTML = '';
+                ac().forEach(c => sl.innerHTML += `<option value="${c}">${c}</option>`);
+                document.getElementById('modalTx').classList.add('open');
+            }
+            function et(tx) {
+                editingId = tx.id;
+                document.getElementById('txTitle').textContent = 'লেনদেন সম্পাদনা';
+                txCustomDate = new Date(tx.date + 'T00:00:00');
+                updateDateWidget('txDate', txCustomDate);
+                document.getElementById('txDesc').value = tx.desc;
+                document.getElementById('txAmount').value = tx.amount;
+                txTypeValue = tx.type;
+                if (tx.type === 'expense') {
+                    document.getElementById('btnTypeExpense').classList.add('active');
+                    document.getElementById('btnTypeIncome').classList.remove('active');
+                } else {
+                    document.getElementById('btnTypeIncome').classList.add('active');
+                    document.getElementById('btnTypeExpense').classList.remove('active');
+                }
+                document.getElementById('txNote').value = tx.note || ''; document.getElementById('txImage').value = '';
+                currentImageData = IMG.get(tx.id) || null;
+                document.getElementById('imagePreview').innerHTML = currentImageData ? `<img src="${currentImageData}">` : '';
+                const sl = document.getElementById('txCategory'); sl.innerHTML = '';
+                ac().forEach(c => sl.innerHTML += `<option value="${c}" ${c===tx.category?'selected':''}>${c}</option>`);
+                document.getElementById('modalTx').classList.add('open');
+            }
+            function ri(file) {
+                return new Promise((rs, rj) => {
+                    const fr = new FileReader();
+                    fr.onload = function (e) {
+                        const im = new Image();
+                        im.onload = function () {
+                            const mx = 800; let w = im.width, h = im.height;
+                            if (w > mx) { h = Math.round((mx/w)*h); w = mx; }
+                            const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+                            cv.getContext('2d').drawImage(im, 0, 0, w, h);
+                            rs(cv.toDataURL('image/jpeg', 0.7));
+                        };
+                        im.onerror = () => rj(new Error('err'));
+                        im.src = e.target.result;
+                    };
+                    fr.onerror = () => rj(new Error('err'));
+                    fr.readAsDataURL(file);
+                });
+            }
+
+            document.getElementById('btnDark').addEventListener('click', td);
+            document.getElementById('txList').addEventListener('click', function (e) {
+                const tr = e.target.closest('tr');
+                if (!tr) return;
+                if (e.target.classList.contains('tx-delete-btn')) {
+                    e.stopPropagation();
+                    if (confirm('মুছে ফেলবেন?')) {
+                        transactions = transactions.filter(t => t.id !== e.target.dataset.id);
+                        IMG.delete(e.target.dataset.id); s(LS.tx, transactions); ra();
+                    }
+                    return;
+                }
+                const tx = transactions.find(t => t.id === tr.dataset.id);
+                if (tx) et(tx);
+            });
+            document.getElementById('btnSaveTx').addEventListener('click', sv);
+            document.getElementById('btnCancelTx').addEventListener('click', () => cm('modalTx'));
+            document.getElementById('btnAddCat').addEventListener('click', () => {
+                const n = prompt('নতুন ক্যাটাগরি:');
+                if (n && n.trim() && !ac().includes(n.trim())) {
+                    customCategories.push(n.trim()); s(LS.categories, customCategories);
+                    const sl = document.getElementById('txCategory'); sl.innerHTML = '';
+                    ac().forEach(c => sl.innerHTML += `<option value="${c}">${c}</option>`);
+                }
+            });
+            document.getElementById('btnCamera').addEventListener('click', () => {
+                const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.capture = 'environment';
+                inp.addEventListener('change', e => { if (e.target.files[0]) ri(e.target.files[0]).then(b64 => { currentImageData = b64; document.getElementById('imagePreview').innerHTML = `<img src="${b64}">`; }); });
+                inp.click();
+            });
+            document.getElementById('txImage').addEventListener('change', function () { if (this.files[0]) ri(this.files[0]).then(b64 => { currentImageData = b64; document.getElementById('imagePreview').innerHTML = `<img src="${b64}">`; }); });
+            document.getElementById('btnCloseImage').addEventListener('click', () => cm('modalImageView'));
+            document.getElementById('btnSaveImage').addEventListener('click', () => {
+                const im = document.getElementById('viewImage');
+                if (im.src && im.src.startsWith('data:')) { const a = document.createElement('a'); a.href = im.src; a.download = 'receipt.jpg'; a.click(); }
+            });
+
+            document.querySelectorAll('.bottom-nav button').forEach(b => {
+                b.addEventListener('click', function () {
+                    document.querySelectorAll('.bottom-nav button').forEach(x => x.classList.remove('active'));
+                    this.classList.add('active');
+                    if (this.dataset.page === 'add') ot();
+                    else if (this.dataset.page === 'report') orp();
+                    else if (this.dataset.page === 'tools') otl();
+                });
+            });
+
+            function otl() { rex(); rdb('debt'); rdb('credit'); rdf(); document.getElementById('modalTools').classList.add('open'); }
+            function rex() {
+                const c = document.getElementById('extraList'); c.innerHTML = extraEntries.length ? '' : '<p>কোনো এন্ট্রি নেই</p>'; let t = 0;
+                extraEntries.forEach(e => { t += e.amount; c.innerHTML += `<div style="display:flex;justify-content:space-between;padding:4px;border-bottom:1px solid var(--border);"><span>${e.date} - ${fm(e.amount)}</span><button class="del-extra" data-id="${e.id}" style="color:var(--danger);background:none;border:none;cursor:pointer;">🗑️</button></div>`; });
+                document.getElementById('extraTotal').textContent = t.toFixed(2);
+            }
+            document.getElementById('btnAddExtra').addEventListener('click', () => { const d = document.getElementById('extraDate').value; const a = parseFloat(document.getElementById('extraAmount').value); if (!d || isNaN(a) || a <= 0) return alert('তারিখ ও টাকা দিন'); extraEntries.push({ id: id(), date: d, amount: a }); s(LS.extra, extraEntries); rex(); document.getElementById('extraAmount').value = ''; });
+            document.getElementById('extraList').addEventListener('click', function (e) { if (e.target.classList.contains('del-extra')) { extraEntries = extraEntries.filter(x => x.id !== e.target.dataset.id); s(LS.extra, extraEntries); rex(); } });
+            document.getElementById('btnClearExtra').addEventListener('click', () => { if (confirm('সব মুছবেন?')) { extraEntries = []; s(LS.extra, extraEntries); rex(); } });
+
+            function rdb(tb) { const c = document.getElementById(tb + 'List'); const es = debtData[tb] || []; c.innerHTML = es.length ? '' : '<p>কোনো এন্ট্রি নেই</p>'; let t = 0; es.forEach(e => { t += e.amount; c.innerHTML += `<div style="display:flex;justify-content:space-between;padding:4px;border-bottom:1px solid var(--border);"><span>${e.name} - ${fm(e.amount)}</span><button class="del-debt" data-tab="${tb}" data-id="${e.id}" style="color:var(--danger);background:none;border:none;cursor:pointer;">🗑️</button></div>`; }); document.getElementById(tb + 'Total').textContent = t.toFixed(2); }
+            document.getElementById('btnAddDebt').addEventListener('click', () => adb('debt'));
+            document.getElementById('btnAddCredit').addEventListener('click', () => adb('credit'));
+            function adb(tb) { const n = document.getElementById(tb + 'Name').value.trim(); const a = parseFloat(document.getElementById(tb + 'Amount').value); if (!n || isNaN(a) || a <= 0) return alert('নাম ও টাকা দিন'); debtData[tb].push({ id: id(), name: n, amount: a }); s(LS.debt, debtData); rdb(tb); document.getElementById(tb + 'Name').value = ''; document.getElementById(tb + 'Amount').value = ''; }
+            document.getElementById('debtList').addEventListener('click', function (e) { if (e.target.classList.contains('del-debt')) { const tb = e.target.dataset.tab; debtData[tb] = debtData[tb].filter(x => x.id !== e.target.dataset.id); s(LS.debt, debtData); rdb(tb); } });
+            document.getElementById('creditList').addEventListener('click', function (e) { if (e.target.classList.contains('del-debt')) { const tb = e.target.dataset.tab; debtData[tb] = debtData[tb].filter(x => x.id !== e.target.dataset.id); s(LS.debt, debtData); rdb(tb); } });
+            document.querySelectorAll('#modalTools .tab').forEach(tb => { tb.addEventListener('click', function () { document.querySelectorAll('#modalTools .tab, #modalTools .tab-content').forEach(el => el.classList.remove('active')); this.classList.add('active'); document.getElementById('dtab-' + this.dataset.dtab).classList.add('active'); }); });
+
+            function rdf() { const c = document.getElementById('draftList'); c.innerHTML = draftEntries.length ? '' : '<p>কোনো আইটেম নেই</p>'; let t = 0; draftEntries.forEach(e => { t += e.amount; c.innerHTML += `<div style="display:flex;justify-content:space-between;padding:4px;border-bottom:1px solid var(--border);"><span>${e.item} - ${fm(e.amount)}</span><button class="del-draft" data-id="${e.id}" style="color:var(--danger);background:none;border:none;cursor:pointer;">🗑️</button></div>`; }); document.getElementById('draftTotal').textContent = t.toFixed(2); }
+            document.getElementById('btnAddDraft').addEventListener('click', () => { const it = document.getElementById('draftItem').value.trim(); const am = parseFloat(document.getElementById('draftAmount').value); if (!it || isNaN(am) || am <= 0) return alert('আইটেম ও টাকা দিন'); draftEntries.push({ id: id(), item: it, amount: am }); s(LS.draft, draftEntries); rdf(); document.getElementById('draftItem').value = ''; document.getElementById('draftAmount').value = ''; });
+            document.getElementById('draftList').addEventListener('click', function (e) { if (e.target.classList.contains('del-draft')) { draftEntries = draftEntries.filter(x => x.id !== e.target.dataset.id); s(LS.draft, draftEntries); rdf(); } });
+            document.getElementById('btnClearDraft').addEventListener('click', () => { if (confirm('সব মুছবেন?')) { draftEntries = []; s(LS.draft, draftEntries); rdf(); } });
+            document.getElementById('btnCloseTools').addEventListener('click', () => cm('modalTools'));
+
+            document.getElementById('btnExportCSV').addEventListener('click', () => { const d = gf(); if (!d.length) return alert('ডেটা নেই'); let csv = '\uFEFFতারিখ,বিবরণ,ক্যাটাগরি,ধরন,পরিমাণ,নোট\n'; d.forEach(t => csv += [t.date, `"${t.desc}"`, t.category, t.type==='income'?'আয়':'ব্যয়', t.amount, `"${t.note||''}"`].join(',')+'\n'); const b = new Blob([csv], { type: 'text/csv;charset=utf-8' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'হিসাব.csv'; a.click(); });
+            document.getElementById('btnBackup').addEventListener('click', () => {
+                const backup = { transactions, budgets, customCategories, extraEntries, debtData, draftEntries };
+                const b = new Blob([JSON.stringify(backup)], { type: 'application/json' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'হিসাব_ব্যাকআপ.json'; a.click();
+            });
+            document.getElementById('btnRestore').addEventListener('click', () => document.getElementById('backupFile').click());
+            document.getElementById('backupFile').addEventListener('change', function (e) {
+                if (!e.target.files[0]) return;
+                const reader = new FileReader();
+                reader.onload = function (ev) {
+                    try {
+                        const data = JSON.parse(ev.target.result);
+                        if (!data.transactions || !Array.isArray(data.transactions)) throw new Error('Invalid backup');
+                        const importedCats = [...new Set([...Object.keys(data.budgets || {}), ...data.customCategories || []])];
+                        const currentCats = ac();
+                        const missingCats = importedCats.filter(c => !currentCats.includes(c));
+                        if (missingCats.length > 0) {
+                            showMissingCategoriesPopup(missingCats, data);
+                            return;
+                        }
+                        applyBackup(data);
+                    } catch (ex) {
+                        alert('ভুল ফাইল ফরম্যাট!');
+                    }
+                };
+                reader.readAsText(e.target.files[0]);
+            });
+
+            function showMissingCategoriesPopup(missingCats, backupData) {
+                const listEl = document.getElementById('missingCategoriesList');
+                listEl.innerHTML = '';
+                missingCats.forEach(cat => {
+                    const row = document.createElement('div');
+                    row.style.display = 'flex';
+                    row.style.justifyContent = 'space-between';
+                    row.style.alignItems = 'center';
+                    row.style.padding = '8px 0';
+                    row.style.borderBottom = '1px solid var(--border)';
+                    row.innerHTML = `<span>${cat}</span><button class="btn btn-blue btn-copy-cat" data-cat="${cat}">কপি করুন</button>`;
+                    listEl.appendChild(row);
+                });
+                document.getElementById('modalImportMissing').classList.add('open');
+                window._pendingBackupData = backupData;
+                window._pendingMissingCats = missingCats;
+            }
+
+            document.getElementById('missingCategoriesList').addEventListener('click', function (e) {
+                if (e.target.classList.contains('btn-copy-cat')) {
+                    const cat = e.target.dataset.cat;
+                    if (!customCategories.includes(cat)) {
+                        customCategories.push(cat);
+                        s(LS.categories, customCategories);
+                    }
+                    const idx = window._pendingMissingCats.indexOf(cat);
+                    if (idx > -1) window._pendingMissingCats.splice(idx, 1);
+                    e.target.closest('div').remove();
+                    if (window._pendingMissingCats.length === 0) {
+                        document.getElementById('modalImportMissing').classList.remove('open');
+                        applyBackup(window._pendingBackupData);
+                    }
+                }
+            });
+
+            document.getElementById('btnCloseMissing').addEventListener('click', () => {
+                document.getElementById('modalImportMissing').classList.remove('open');
+                if (window._pendingBackupData) applyBackup(window._pendingBackupData);
+                window._pendingBackupData = null;
+                window._pendingMissingCats = null;
+            });
+
+            function applyBackup(data) {
+                if (confirm('ব্যাকআপ থেকে ডেটা রিপ্লেস করবেন? (বর্তমান ডেটা মুছে যাবে)')) {
+                    transactions = data.transactions;
+                    budgets = data.budgets || {};
+                    customCategories = data.customCategories || [];
+                    extraEntries = data.extraEntries || [];
+                    debtData = data.debtData || { debt: [], credit: [] };
+                    draftEntries = data.draftEntries || [];
+                    IMG.clear();
+                    transactions.forEach(t => { if (t.imageData) IMG.set(t.id, t.imageData); });
+                    s(LS.tx, transactions);
+                    s(LS.budget, budgets);
+                    s(LS.categories, customCategories);
+                    s(LS.extra, extraEntries);
+                    s(LS.debt, debtData);
+                    s(LS.draft, draftEntries);
+                    selectedBudgetCat = null;
+                    s(LS.lastCat, null);
+                    ra();
+                    document.getElementById('backupFile').value = '';
+                }
+            }
+
+            document.getElementById('btnClearAll').addEventListener('click', () => { if (transactions.length && confirm('সব লেনদেন মুছবেন?')) { transactions = []; IMG.clear(); s(LS.tx, transactions); ra(); } });
+
+            function orp() {
+                const v = document.getElementById('monthFilter').value;
+                const lb = v ? (() => { const [y, m] = v.split('-').map(Number); return new Date(y, m-1, 1).toLocaleString('bn-BD', { month: 'long', year: 'numeric' }); })() : new Date().toLocaleString('bn-BD', { month: 'long', year: 'numeric' });
+                document.getElementById('reportMonthLabel').textContent = '- ' + lb;
+                const d = v ? transactions.filter(t => t.date.startsWith(v)) : transactions;
+                const inc = d.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+                const exp = d.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+                const bal = inc - exp;
+
+                const catExp = {};
+                d.filter(t => t.type === 'expense').forEach(t => {
+                    catExp[t.category] = (catExp[t.category] || 0) + t.amount;
+                });
+
+                const monthKey = v ? v : getCurrentMonthKey();
+                const budgetSummary = {};
+                for (const cat in budgets) {
+                    const b = budgets[cat];
+                    if (b.monthly && b.monthly[monthKey]) {
+                        budgetSummary[cat] = b.monthly[monthKey];
+                    }
+                }
+
+                let h = '<table><thead><tr><th>তারিখ</th><th>ক্যাটাগরি</th><th>আয়</th><th>ব্যয়</th></tr></thead><tbody>';
+                d.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
+                    h += `<tr><td>${t.date}</td><td>${t.category}</td><td style="text-align:right;">${t.type==='income' ? fm(t.amount) : ''}</td><td style="text-align:right;">${t.type==='expense' ? fm(t.amount) : ''}</td></tr>`;
+                });
+                h += '</tbody></table>';
+
+                h += '<div class="summary-grid">';
+                h += `<div class="summary-btn income-bg">💰 মোট আয়<br><b>${fm(inc)}</b></div>`;
+                h += `<div class="summary-btn expense-bg">💸 মোট ব্যয়<br><b>${fm(exp)}</b></div>`;
+                h += `<div class="summary-btn balance-bg">⚖️ ব্যালেন্স<br><b>${fm(bal)}</b></div>`;
+                for (const cat in catExp) {
+                    const spent = catExp[cat];
+                    const budgetAmt = budgetSummary[cat] || 0;
+                    const balance = budgetAmt - spent;
+                    h += `<div class="summary-btn">📌 ${cat}<br><b>${fm(spent)}</b></div>`;
+                    h += `<div class="summary-btn balance-bg">🎯 বাজেট ${cat}<br><b>${fm(budgetAmt)}</b></div>`;
+                    h += `<div class="summary-btn" style="color:${balance>=0?'var(--income)':'var(--danger)'};">⚖️ ব্যালেন্স<br><b>${fm(balance)}</b></div>`;
+                }
+                h += '</div>';
+
+                document.getElementById('reportPreview').innerHTML = h;
+                document.getElementById('modalReport').classList.add('open');
+            }
+            document.getElementById('btnPrintReport').addEventListener('click', () => {
+                const printContent = document.getElementById('reportPreview').innerHTML;
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`<!DOCTYPE html><html><head><title>হিসাব রিপোর্ট</title>
+                <style>
+                    body { font-family: sans-serif; padding: 16px; }
+                    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; border: 2px solid #4caf50; }
+                    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+                    th { background: #f5f5f5; }
+                    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+                    .summary-btn { background: #fff; border: 1px solid #ccc; border-radius: 12px; padding: 10px 8px; font-size: 13px; font-weight: 600; display: flex; flex-direction: column; align-items: center; text-align: center; }
+                    .summary-btn.income-bg { background: #e6f4ea; color: #0d904f; }
+                    .summary-btn.expense-bg { background: #fce4e4; color: #e67e22; }
+                    .summary-btn.balance-bg { background: #e8f0fe; color: #1a73e8; }
+                </style></head><body>${printContent}</body></html>`);
+                printWindow.document.close();
+                printWindow.focus();
+                printWindow.print();
+            });
+            document.getElementById('btnDownloadExcel').addEventListener('click', () => {
+                const htmlContent = document.getElementById('reportPreview').innerHTML;
+                const excelHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"></head><body>${htmlContent}</body></html>`;
+                const b = new Blob([excelHtml], { type: 'application/vnd.ms-excel' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'হিসাব.xls'; a.click();
+            });
+            document.getElementById('btnShareReport').addEventListener('click', async () => {
+                const reportText = document.getElementById('reportPreview').innerText;
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'হিসাব রিপোর্ট',
+                            text: reportText
+                        });
+                    } catch (err) {
+                        await navigator.clipboard.writeText(reportText);
+                        alert('শেয়ার করা যায়নি, রিপোর্ট ক্লিপবোর্ডে কপি করা হয়েছে');
+                    }
+                } else {
+                    await navigator.clipboard.writeText(reportText);
+                    alert('শেয়ার করার অপশন নেই, রিপোর্ট ক্লিপবোর্ডে কপি করা হয়েছে');
+                }
+            });
+            document.getElementById('btnCloseReport').addEventListener('click', () => cm('modalReport'));
+
+            document.getElementById('budgetCatBtn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                const dd = document.getElementById('budgetDropdown'); let h = '';
+                if (selectedBudgetCat && budgets[selectedBudgetCat]) {
+                    const oc = Object.keys(budgets).filter(c => c !== selectedBudgetCat);
+                    oc.forEach(c => { h += `<div class="budget-item"><span class="cat-name" data-cat="${c}">${c}</span><button class="btn-del" data-cat="${c}">✕</button></div>`; });
+                    if (!oc.length) h += '<p style="text-align:center;">অন্য বাজেট নেই</p>';
+                } else {
+                    const cs = Object.keys(budgets);
+                    cs.forEach(c => { h += `<div class="budget-item"><span class="cat-name" data-cat="${c}">${c}</span><button class="btn-del" data-cat="${c}">✕</button></div>`; });
+                    if (!cs.length) h += '<p style="text-align:center;">কোনো বাজেট নেই</p>';
+                }
+                h += `<div style="text-align:center;margin-top:8px;"><button class="btn btn-blue" id="btnAddBudget">+ নতুন বাজেট</button></div>`;
+                dd.innerHTML = h; dd.classList.add('open');
+                document.getElementById('periodDropdown').classList.remove('open');
+            });
+
+            document.getElementById('budgetPeriodBtn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                document.getElementById('periodDropdown').classList.toggle('open');
+                document.getElementById('budgetDropdown').classList.remove('open');
+            });
+
+            document.getElementById('budgetDropdown').addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (e.target.classList.contains('cat-name')) {
+                    const c = e.target.dataset.cat; selectedBudgetCat = c; budgetPeriod = 'monthly'; budgetOffset = 0; s(LS.lastCat, c); budgetCustomDate = null; budgetNavMonthOffset = 0;
+                    document.getElementById('budgetDropdown').classList.remove('open'); ra();
+                } else if (e.target.classList.contains('btn-del')) {
+                    const c = e.target.dataset.cat;
+                    if (confirm(`"${c}" বাজেট মুছবেন?`)) { delete budgets[c]; if (selectedBudgetCat === c) { selectedBudgetCat = null; s(LS.lastCat, null); } s(LS.budget, budgets); document.getElementById('budgetDropdown').classList.remove('open'); ra(); }
+                } else if (e.target.id === 'btnAddBudget') { document.getElementById('budgetDropdown').classList.remove('open'); obm(null); }
+            });
+
+            document.getElementById('periodDropdown').addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (e.target.classList.contains('cat-name')) {
+                    budgetPeriod = e.target.dataset.period; budgetOffset = 0; budgetCustomDate = null; budgetNavMonthOffset = 0;
+                    document.getElementById('periodDropdown').classList.remove('open'); ra();
+                }
+            });
+
+            document.addEventListener('click', function (e) {
+                document.getElementById('budgetDropdown').classList.remove('open');
+                document.getElementById('periodDropdown').classList.remove('open');
+            });
+
+            document.getElementById('summaryPrev').addEventListener('click', () => { summaryMonthOffset--; ra(); });
+            document.getElementById('summaryNext').addEventListener('click', () => { if (summaryMonthOffset < 0) { summaryMonthOffset++; ra(); } });
+
+            function obm(cat) {
+                const now = new Date();
+                let date = new Date(now.getFullYear(), now.getMonth() + (budgetPeriod==='monthly'?budgetNavMonthOffset:0), 1);
+                setDateWidget('budgetDate', date);
+
+                document.getElementById('budgetMonthlyField').style.display = budgetPeriod==='monthly'?'block':'none';
+                document.getElementById('budgetWeeklyField').style.display = budgetPeriod==='weekly'?'block':'none';
+                document.getElementById('budgetYearlyField').style.display = budgetPeriod==='yearly'?'block':'none';
+
+                const sl = document.getElementById('budgetCat'); sl.innerHTML = '';
+                ac().forEach(c => sl.innerHTML += `<option value="${c}" ${c===cat?'selected':''}>${c}</option>`);
+
+                const key = getPeriodKey(budgetPeriod, budgetPeriod==='monthly'?budgetNavMonthOffset:budgetOffset);
+                const amt = (cat && budgets[cat]?.[budgetPeriod]?.[key]) || '';
+                if (budgetPeriod==='monthly') document.getElementById('budgetMonthly').value = amt;
+                else if (budgetPeriod==='weekly') document.getElementById('budgetWeekly').value = amt;
+                else document.getElementById('budgetYearly').value = amt;
+                document.getElementById('modalBudget').classList.add('open');
+            }
+            document.getElementById('btnSaveBudget').addEventListener('click', () => {
+                const c = document.getElementById('budgetCat').value;
+                if (!c) return;
+                if (!budgets[c]) budgets[c] = { monthly: {}, weekly: {}, yearly: {} };
+                const date = getDateFromWidget('budgetDate');
+                const key = getPeriodKeyFromDate(budgetPeriod, date);
+                let amt = 0;
+                if (budgetPeriod==='monthly') amt = parseFloat(document.getElementById('budgetMonthly').value)||0;
+                else if (budgetPeriod==='weekly') amt = parseFloat(document.getElementById('budgetWeekly').value)||0;
+                else amt = parseFloat(document.getElementById('budgetYearly').value)||0;
+                budgets[c][budgetPeriod][key] = amt;
+                s(LS.budget, budgets);
+                if (!selectedBudgetCat) { selectedBudgetCat = c; s(LS.lastCat, c); }
+                cm('modalBudget'); ra();
+            });
+            document.getElementById('btnCancelBudget').addEventListener('click', () => cm('modalBudget'));
+
+            document.getElementById('editBudgetIcon').addEventListener('click', () => { if (selectedBudgetCat) obm(selectedBudgetCat); });
+            document.getElementById('deleteBudgetIcon').addEventListener('click', () => {
+                if (selectedBudgetCat && confirm(`"${selectedBudgetCat}" বাজেট মুছবেন?`)) {
+                    delete budgets[selectedBudgetCat];
+                    selectedBudgetCat = null; s(LS.lastCat, null); s(LS.budget, budgets); ra();
+                }
+            });
+
+            document.getElementById('budgetDateWidget').addEventListener('click', function (e) {
+                if (e.target.classList.contains('date-arrow')) {
+                    const dir = e.target.classList.contains('prev') ? -1 : 1;
+                    const date = getDateFromWidget('budgetDate');
+                    date.setDate(date.getDate() + dir);
+                    setDateWidget('budgetDate', date);
+                    closeAllCalendars();
+                } else if (e.target.id === 'budgetCalendarIcon') {
+                    closeAllCalendars();
+                    openCalendar('budgetDate', getDateFromWidget('budgetDate'));
+                }
+            });
+            document.getElementById('budgetCalendarPopup').addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (e.target.classList.contains('cal-nav')) {
+                    const dir = e.target.dataset.dir;
+                    const date = getDateFromWidget('budgetDate');
+                    if (dir==='prev') date.setMonth(date.getMonth()-1);
+                    else date.setMonth(date.getMonth()+1);
+                    setDateWidget('budgetDate', date);
+                    openCalendar('budgetDate', date);
+                } else if (e.target.classList.contains('cal-day')) {
+                    const day = parseInt(e.target.dataset.day);
+                    const date = getDateFromWidget('budgetDate');
+                    date.setDate(day);
+                    setDateWidget('budgetDate', date);
+                    closeAllCalendars();
+                }
+            });
+
+            document.getElementById('txDateWidget').addEventListener('click', function (e) {
+                if (e.target.classList.contains('date-arrow')) {
+                    const dir = e.target.classList.contains('prev') ? -1 : 1;
+                    txCustomDate.setDate(txCustomDate.getDate() + dir);
+                    updateDateWidget('txDate', txCustomDate);
+                    closeAllCalendars();
+                } else if (e.target.id === 'txCalendarIcon') {
+                    closeAllCalendars();
+                    openCalendar('txDate', txCustomDate);
+                }
+            });
+            document.getElementById('txCalendarPopup').addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (e.target.classList.contains('cal-nav')) {
+                    const dir = e.target.dataset.dir;
+                    if (dir==='prev') txCustomDate.setMonth(txCustomDate.getMonth()-1);
+                    else txCustomDate.setMonth(txCustomDate.getMonth()+1);
+                    updateDateWidget('txDate', txCustomDate);
+                    openCalendar('txDate', txCustomDate);
+                } else if (e.target.classList.contains('cal-day')) {
+                    const day = parseInt(e.target.dataset.day);
+                    txCustomDate.setDate(day);
+                    updateDateWidget('txDate', txCustomDate);
+                    closeAllCalendars();
+                }
+            });
+
+            document.getElementById('searchInput').addEventListener('input', ra);
+            document.getElementById('monthFilter').addEventListener('change', ra);
+            document.getElementById('btnResetMonth').addEventListener('click', () => { document.getElementById('monthFilter').value = ''; ra(); });
+            document.querySelectorAll('.modal').forEach(m => { m.addEventListener('click', function (e) { if (e.target === m) m.classList.remove('open'); }); });
+
+            window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); window.deferredPrompt = e; document.getElementById('btnInstall').style.display = 'flex'; });
+            window.addEventListener('appinstalled', () => { document.getElementById('btnInstall').style.display = 'none'; });
+            if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => { }); }); }
+
+            ra();
+        })();
+    </script>
 </body>
 </html>
